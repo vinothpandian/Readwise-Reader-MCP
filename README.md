@@ -79,7 +79,8 @@ List documents from Readwise Reader with optional filtering. Returns complete do
 - `category` (optional): Filter by document category
 - `tag` (optional): Filter by tag name
 - `pageCursor` (optional): Page cursor for pagination
-- `withHtmlContent` (optional): Include HTML content in response
+- `withHtmlContent` (optional): ⚠️ **PERFORMANCE WARNING**: Include HTML content in the response. This significantly slows down the API. Only use when explicitly requested by the user or when raw HTML is specifically needed for the task.
+- `withFullContent` (optional): ⚠️ **PERFORMANCE WARNING**: Include full converted text content in the response. This significantly slows down the API as it fetches and processes each document's content. Only use when explicitly requested by the user or when document content is specifically needed for analysis/reading. Default: false for performance.
 
 **Returns:**
 Complete document objects with all available fields:
@@ -111,6 +112,18 @@ Delete a document from Readwise Reader.
 List all tags from Readwise Reader.
 
 **Parameters:** None
+
+### `readwise_topic_search`
+Search documents in Readwise Reader by topic using regex matching on title, summary, notes, and tags.
+
+**Parameters:**
+- `searchTerms` (required): Array of search terms to match against document content (case-insensitive regex matching)
+
+**Returns:**
+Search results with matching documents including:
+- Search terms used
+- Total number of matches
+- Complete document objects with all available metadata (same fields as `readwise_list_documents`)
 
 ## Authentication
 

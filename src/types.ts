@@ -9,7 +9,7 @@ export interface ReadwiseDocument {
   published_date?: string | number;
   image_url?: string;
   location: 'new' | 'later' | 'shortlist' | 'archive' | 'feed';
-  category?: 'article' | 'book' | 'tweet' | 'pdf' | 'email' | 'youtube' | 'podcast' | 'video';
+  category?: 'article' | 'email' | 'rss' | 'highlight' | 'note' | 'pdf' | 'epub' | 'tweet' | 'video';
   tags?: string[] | object;
   site_name?: string;
   word_count?: number | null;
@@ -30,7 +30,7 @@ export interface CreateDocumentRequest {
   html?: string;
   tags?: string[];
   location?: 'new' | 'later' | 'shortlist' | 'archive' | 'feed';
-  category?: 'article' | 'book' | 'tweet' | 'pdf' | 'email' | 'youtube' | 'podcast';
+  category?: 'article' | 'email' | 'rss' | 'highlight' | 'note' | 'pdf' | 'epub' | 'tweet' | 'video';
 }
 
 export interface UpdateDocumentRequest {
@@ -39,8 +39,9 @@ export interface UpdateDocumentRequest {
   summary?: string;
   published_date?: string;
   image_url?: string;
-  location?: 'new' | 'later' | 'shortlist' | 'archive' | 'feed';
-  category?: 'article' | 'book' | 'tweet' | 'pdf' | 'email' | 'youtube' | 'podcast';
+  location?: 'new' | 'later' | 'archive' | 'feed';
+  category?: 'article' | 'email' | 'rss' | 'highlight' | 'note' | 'pdf' | 'epub' | 'tweet' | 'video';
+  tags?: string[];
 }
 
 export interface ListDocumentsParams {
@@ -48,7 +49,7 @@ export interface ListDocumentsParams {
   updatedAfter?: string;
   addedAfter?: string;
   location?: 'new' | 'later' | 'shortlist' | 'archive' | 'feed';
-  category?: 'article' | 'book' | 'tweet' | 'pdf' | 'email' | 'youtube' | 'podcast';
+  category?: 'article' | 'email' | 'rss' | 'highlight' | 'note' | 'pdf' | 'epub' | 'tweet' | 'video';
   tag?: string;
   pageCursor?: string;
   withHtmlContent?: boolean;
@@ -63,7 +64,7 @@ export interface ListDocumentsResponse {
 }
 
 export interface ReadwiseTag {
-  id: string;
+  key: string;
   name: string;
 }
 

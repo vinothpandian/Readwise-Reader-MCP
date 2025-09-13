@@ -27,7 +27,7 @@ export const tools: Tool[] = [
         },
         category: {
           type: 'string',
-          enum: ['article', 'book', 'tweet', 'pdf', 'email', 'youtube', 'podcast'],
+          enum: ['article', 'email', 'rss', 'highlight', 'note', 'pdf', 'epub', 'tweet', 'video'],
           description: 'Category of the document (auto-detected if not specified)',
         },
       },
@@ -60,7 +60,7 @@ export const tools: Tool[] = [
         },
         category: {
           type: 'string',
-          enum: ['article', 'book', 'tweet', 'pdf', 'email', 'youtube', 'podcast'],
+          enum: ['article', 'email', 'rss', 'highlight', 'note', 'pdf', 'epub', 'tweet', 'video'],
           description: 'Filter by document category',
         },
         tag: {
@@ -115,13 +115,18 @@ export const tools: Tool[] = [
         },
         location: {
           type: 'string',
-          enum: ['new', 'later', 'shortlist', 'archive', 'feed'],
+          enum: ['new', 'later', 'archive', 'feed'],
           description: 'New location for the document',
         },
         category: {
           type: 'string',
-          enum: ['article', 'book', 'tweet', 'pdf', 'email', 'youtube', 'podcast'],
+          enum: ['article', 'email', 'rss', 'highlight', 'note', 'pdf', 'epub', 'tweet', 'video'],
           description: 'New category for the document',
+        },
+        tags: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'Tags to assign to the document',
         },
       },
       required: ['id'],

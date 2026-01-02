@@ -174,21 +174,6 @@ export const tools: Tool[] = [
     },
   },
   {
-    name: 'readwise_delete_document',
-    description: 'Delete a document from Readwise Reader',
-    inputSchema: {
-      type: 'object',
-      properties: {
-        id: {
-          type: 'string',
-          description: 'Document ID to delete',
-        },
-      },
-      required: ['id'],
-      additionalProperties: false,
-    },
-  },
-  {
     name: 'readwise_list_tags',
     description: 'List all tags from Readwise Reader',
     inputSchema: {
@@ -211,6 +196,58 @@ export const tools: Tool[] = [
         },
       },
       required: ['searchTerms'],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: 'readwise_update_document_tags',
+    description: 'Update tags for a single document. Only modifies tags, leaving all other document properties unchanged.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        id: {
+          type: 'string',
+          description: 'Document ID to update tags for',
+        },
+        tags: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'Tags to apply to the document (e.g., ["tag1", "tag2"])',
+        },
+        mode: {
+          type: 'string',
+          enum: ['replace', 'add'],
+          description: 'Mode of operation: "replace" replaces all existing tags, "add" adds to existing tags. Default: "replace"',
+        },
+      },
+      required: ['id', 'tags'],
+      additionalProperties: false,
+    },
+  },
+  {
+    name: 'readwise_bulk_update_tags',
+    description: 'Update tags for multiple documents at once. Only modifies tags, leaving all other document properties unchanged.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        documentIds: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'List of document IDs to update tags for',
+          minItems: 1,
+        },
+        tags: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'Tags to apply to all specified documents (e.g., ["tag1", "tag2"])',
+        },
+        mode: {
+          type: 'string',
+          enum: ['replace', 'add'],
+          description: 'Mode of operation: "replace" replaces all existing tags, "add" adds to existing tags. Default: "replace"',
+        },
+      },
+      required: ['documentIds', 'tags'],
       additionalProperties: false,
     },
   },

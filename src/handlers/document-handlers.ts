@@ -212,23 +212,4 @@ export async function handleUpdateDocument(args: any) {
   };
 }
 
-export async function handleDeleteDocument(args: any) {
-  const client = initializeClient();
-  const { id } = args as { id: string };
-  const response = await client.deleteDocument(id);
-
-  let responseText = `Document ${id} deleted successfully!`;
-  
-  if (response.messages && response.messages.length > 0) {
-    responseText += '\n\nMessages:\n' + response.messages.map(msg => `${msg.type.toUpperCase()}: ${msg.content}`).join('\n');
-  }
-
-  return {
-    content: [
-      {
-        type: 'text',
-        text: responseText,
-      },
-    ],
-  };
-} 
+ 

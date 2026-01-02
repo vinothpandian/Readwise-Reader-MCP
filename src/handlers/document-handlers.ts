@@ -129,6 +129,7 @@ export async function handleListDocuments(args: any) {
         tags: doc.tags,
         site_name: doc.site_name,
         word_count: doc.word_count,
+        reading_time: doc.reading_time,
         created_at: doc.created_at,
         updated_at: doc.updated_at,
         published_date: doc.published_date,
@@ -143,6 +144,10 @@ export async function handleListDocuments(args: any) {
         saved_at: doc.saved_at,
         last_moved_at: doc.last_moved_at,
       };
+
+      if (params.withRawSourceUrl && doc.raw_source_url) {
+        result.raw_source_url = doc.raw_source_url;
+      }
       
       if (shouldIncludeContent) {
         result.content = content; // LLM-friendly text content instead of raw HTML

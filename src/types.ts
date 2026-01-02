@@ -13,6 +13,7 @@ export interface ReadwiseDocument {
   tags?: string[] | object;
   site_name?: string;
   word_count?: number | null;
+  reading_time?: string;
   created_at: string;
   updated_at: string;
   notes?: string;
@@ -23,14 +24,23 @@ export interface ReadwiseDocument {
   saved_at?: string;
   last_moved_at?: string;
   html_content?: string;
+  raw_source_url?: string;
 }
 
 export interface CreateDocumentRequest {
   url: string;
   html?: string;
-  tags?: string[];
-  location?: 'new' | 'later' | 'shortlist' | 'archive' | 'feed';
+  should_clean_html?: boolean;
+  title?: string;
+  author?: string;
+  summary?: string;
+  published_date?: string;
+  image_url?: string;
+  location?: 'new' | 'later' | 'archive' | 'feed';
   category?: 'article' | 'email' | 'rss' | 'highlight' | 'note' | 'pdf' | 'epub' | 'tweet' | 'video';
+  saved_using?: string;
+  tags?: string[];
+  notes?: string;
 }
 
 export interface UpdateDocumentRequest {
@@ -39,6 +49,7 @@ export interface UpdateDocumentRequest {
   summary?: string;
   published_date?: string;
   image_url?: string;
+  seen?: boolean;
   location?: 'new' | 'later' | 'archive' | 'feed';
   category?: 'article' | 'email' | 'rss' | 'highlight' | 'note' | 'pdf' | 'epub' | 'tweet' | 'video';
   tags?: string[];
@@ -53,6 +64,7 @@ export interface ListDocumentsParams {
   tag?: string;
   pageCursor?: string;
   withHtmlContent?: boolean;
+  withRawSourceUrl?: boolean;
   withFullContent?: boolean;
   limit?: number;
 }
@@ -61,6 +73,12 @@ export interface ListDocumentsResponse {
   count: number;
   nextPageCursor?: string;
   results: ReadwiseDocument[];
+}
+
+export interface ListTagsResponse {
+  count: number;
+  nextPageCursor?: string;
+  results: ReadwiseTag[];
 }
 
 export interface ReadwiseTag {
